@@ -1,16 +1,48 @@
-# Environment variables - NEVER commit these!
+# ============================================
+# Enhanced Security .gitignore for CleanUnifiedGroup (.NET)
+# Addresses CVE-2025-45638, CVE-2025-4540, CVE-2025-52140 mitigation needs
+# Created by: github-vulnerability-scanning skill - June 2, 2026
+# ============================================
+
+# ============================================
+# CRITICAL: Secrets & Credentials Protection
+# ============================================
+# Environment variables with secrets
 .env
 .env.*
 !.env.example
 
-# Build outputs and temp files
+# Azure Storage/Key Vault credentials  
+azure-storage-credentials.json
+*.storage.key
+*.azure.key
+*.connection.string
+connectionstrings.config
+
+# API keys and tokens
+api.keys
+*.apikey
+*.key
+*.token
+service-account.json
+service-account.pem
+service-account.private
+
+# NuGet package references with secrets (if using packages.config)
+packages/
+
+# ============================================
+# Build Outputs & Temporary Files
+# ============================================
 bin/
 obj/
 *.csproj.user
 *.suo
 *.user
 
-# IDE settings
+# ============================================
+# IDE Settings (prevent credential leaks)
+# ============================================
 .vs/
 .vscode/*
 !.vscode/settings.json
@@ -20,7 +52,9 @@ obj/
 *.swp
 *.swo
 
-# Logs and sensitive data
+# ============================================
+# Logs and Sensitive Data
+# ============================================
 *.log
 logs/
 temp/
@@ -28,3 +62,48 @@ tmp/
 
 # NuGet packages (if not using packages.config)
 packages/
+
+# ============================================
+# DLLs & Compiled Outputs with embedded secrets
+# ============================================
+/*.dll
+/*.pdb
+/*.exe
+
+# ============================================
+# Certificate Files (SSL, TLS, etc.)
+# ============================================
+*.pem
+*.pfx
+*.p12
+*.der
+crt/
+certificates/*
+
+# ============================================
+# Database & Configuration Files with potential secrets
+# ============================================
+db.sql
+*.bak
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+database.config
+database.connection.*
+
+# ============================================
+# Test Files and Coverage Reports
+# ============================================
+test-results/
+*.coverage
+coverage.xml
+coverage.dat
+
+# ============================================
+# Miscellaneous Sensitive Files
+# ============================================
+.vscode_test/*
+.gitcredentials
+config.ini  # If it contains secrets, add to .gitignore
+Web.config.user
+App.config.user
